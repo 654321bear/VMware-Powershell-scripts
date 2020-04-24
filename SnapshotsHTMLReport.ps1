@@ -50,13 +50,13 @@ $Report = @()
 Generate-Report > "VmwareSnapshots.html"
 	IF ($Report -ne ""){
 	$SmtpClient = New-Object system.net.mail.smtpClient
-	$SmtpClient.host = "alerts.meritenergy.com"   #Change to a SMTP server in your environment
+	$SmtpClient.host = ""   #Change to a SMTP server in your environment
 	$MailMessage = New-Object system.net.mail.mailmessage
-	$MailMessage.from = "Vmware.Automation@meritenergy.com"   #Change to email address you want emails to be coming from
-	$MailMessage.To.add("john.thompson@meritenergy.com")	#Change to email address you would like to receive emails.
+	$MailMessage.from = ""   #Change to email address you want emails to be coming from
+	$MailMessage.To.add(")	#Change to email address you would like to receive emails.
     #$MailMessage.To.add("john.thompson@alonusa.com,jehad.alasad@alonusa.com,earl.fischer@alonusa.com")	#Change to email address you would like to receive emails.
 	$MailMessage.IsBodyHtml = 1
-	$MailMessage.Subject = "Vmware Snapshots (Test Report)"
+	$MailMessage.Subject = ""
 	$MailMessage.Body = Generate-Report
 	$SmtpClient.Send($MailMessage)}
 
