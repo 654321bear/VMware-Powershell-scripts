@@ -34,13 +34,13 @@ Start-Sleep -s 10
     $attachment = "c:\temp\Hana_VMs_Stats.csv"
 
 	$SmtpClient = New-Object system.net.mail.smtpClient
-	$SmtpClient.host = "alerts.meritenergy.com"   #Change to a SMTP server in your environment
+	$SmtpClient.host = ""   #Change to a SMTP server in your environment
     $SmtpClient.port = "25"
 	$MailMessage = New-Object system.net.mail.mailmessage
-	$MailMessage.from = "Vmware.Automation@meritenergy.com"   #Change to email address you want emails to be coming from
-	$MailMessage.To.add("john.thompson@meritenergy.com")	#Change to email address you would like to receive emails.
-	$MailMessage.Subject = "HANA VM Performance stats: $($todayTimestamp)"
-	$MailMessage.Body = "HANA VM Performance stats: $($todayTimestamp)"
+	$MailMessage.from = ""   #Change to email address you want emails to be coming from
+	$MailMessage.To.add("")	#Change to email address you would like to receive emails.
+	$MailMessage.Subject = ""
+	$MailMessage.Body = ""
     $MailMessage.Attachments.Add($attachment)
 	$SmtpClient.Send($MailMessage)
 
