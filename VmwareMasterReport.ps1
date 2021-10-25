@@ -3,8 +3,8 @@
 #Set-PowerCLIConfiguration -DefaultVIServerMode multiple -Confirm:$false
 
 #Connect to all Vmware Environments
-Connect-VIServer -Server PROD-vcenter 
-Connect-VIServer -Server NV-vcenter
+Connect-VIServer -Server vcenter 
+Connect-VIServer -Server vcenter2
 
 #Set Date variable
 $a = date
@@ -154,12 +154,11 @@ $SNAPatt = new-object Net.Mail.Attachment("C:\temp\" + $SNAPexport)
 #Generate email and add attachments
 	IF ($Report -ne ""){
 	$SmtpClient = New-Object system.net.mail.smtpClient
-	$SmtpClient.host = "alerts.meritenergy.com"   #Change to a SMTP server in your environment
+	$SmtpClient.host = "alerts.COMPANY.com"   #Change to a SMTP server in your environment
     $SmtpClient.port = "25"
 	$MailMessage = New-Object system.net.mail.mailmessage
-	$MailMessage.from = "Vmware.Automation@meritenergy.com"   #Change to email address you want emails to be coming from
-	$MailMessage.To.add("john.thompson@meritenergy.com")	#Change to email address you would like to receive emails.
-    #$MailMessage.To.add("DL-DAL-IT System Alerts <DL-DAL-ITSystemAlerts@ALONUSA.com>")	#Change to email address you would like to receive emails.
+	$MailMessage.from = "Vmware.Automation@COMPANY.com"   #Change to email address you want emails to be coming from
+	$MailMessage.To.add("USER@COMPANY.com")	#Change to email address you would like to receive emails.
 	$MailMessage.IsBodyHtml = 1
 	$MailMessage.Subject = "Master Vmware Report"
 	$MailMessage.Body = Generate-Report
@@ -173,8 +172,8 @@ $SNAPatt = new-object Net.Mail.Attachment("C:\temp\" + $SNAPexport)
 echo "Done with Email"
 
 #Disconnect from all Vmware Environments
-Disconnect-VIServer	PROD-vcenter -confirm:$false
-
+Disconnect-VIServer	vcenter -confirm:$false
+Disconnect-VIServer	vcenter2 -confirm:$false
 
 #Delete files after email is sent
 $Masteratt.Dispose()

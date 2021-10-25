@@ -1,5 +1,5 @@
 ﻿Add-PSSnapin VMware.VimAutomation.Core
-Connect-VIServer -Server ALNS0080 
+Connect-VIServer -Server vcenter 
 
 $report = @()
 

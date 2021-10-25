@@ -50,15 +50,14 @@ $Report = @()
 Generate-Report > "VmwareSnapshots.html"
 	IF ($Report -ne ""){
 	$SmtpClient = New-Object system.net.mail.smtpClient
-	$SmtpClient.host = ""   #Change to a SMTP server in your environment
+	$SmtpClient.host = "alerts.COMPANY.com"   #Change to a SMTP server in your environment
 	$MailMessage = New-Object system.net.mail.mailmessage
-	$MailMessage.from = ""   #Change to email address you want emails to be coming from
-	$MailMessage.To.add(")	#Change to email address you would like to receive emails.
-    #$MailMessage.To.add("john.thompson@alonusa.com,jehad.alasad@alonusa.com,earl.fischer@alonusa.com")	#Change to email address you would like to receive emails.
+	$MailMessage.from = "Vmware.Automation@COMPANY.com"   #Change to email address you want emails to be coming from
+	$MailMessage.To.add("USER@COMPANY.com")	#Change to email address you would like to receive emails.
 	$MailMessage.IsBodyHtml = 1
-	$MailMessage.Subject = ""
+	$MailMessage.Subject = "Vmware Snapshots (Test Report)"
 	$MailMessage.Body = Generate-Report
 	$SmtpClient.Send($MailMessage)}
 
 Generate-Report > c:\temp\VmwareSnapshots.html
-Disconnect-VIServer	prod-vcenter -confirm:$false
+Disconnect-VIServer	vcenter -confirm:$false

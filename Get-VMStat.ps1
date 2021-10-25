@@ -1,5 +1,5 @@
 ﻿Import-Module VMware.VimAutomation.Core
-Connect-VIServer prod-vcenter
+Connect-VIServer vcenter
 $todayTimestamp = "$([DateTime]::Now.Year)-$([DateTime]::Now.Month)-$([DateTime]::Now.Day)";
 $allvms = @()
 $vms = Get-VM | Where { $_.name -eq "vdev-dwd-aci" -or $_.name -eq "vdev-MD1-ACI"  -or $_.name -eq "vprod-dwp-aci"  -or $_.name -eq "vprod-MP1-ACI"  -or $_.name -eq "vprod-MP1-AS1"  -or $_.name -eq "vprod-MP1-AS2"  -or $_.name -eq "vprod-SMP-ACI" -or $_.name -eq "vqa-MQ1-ACI" -or $_.name -eq "vqa-MQ1-AS1" -or $_.name -eq "vqa-MQ1-AS2" } 
@@ -34,18 +34,18 @@ Start-Sleep -s 10
     $attachment = "c:\temp\Hana_VMs_Stats.csv"
 
 	$SmtpClient = New-Object system.net.mail.smtpClient
-	$SmtpClient.host = ""   #Change to a SMTP server in your environment
+	$SmtpClient.host = "alerts.COMPANY.com"   #Change to a SMTP server in your environment
     $SmtpClient.port = "25"
 	$MailMessage = New-Object system.net.mail.mailmessage
-	$MailMessage.from = ""   #Change to email address you want emails to be coming from
-	$MailMessage.To.add("")	#Change to email address you would like to receive emails.
-	$MailMessage.Subject = ""
-	$MailMessage.Body = ""
+	$MailMessage.from = "Vmware.Automation@COMPANY.com"   #Change to email address you want emails to be coming from
+	$MailMessage.To.add("USER@COMPANY.com")	#Change to email address you would like to receive emails.
+	$MailMessage.Subject = "HANA VM Performance stats: $($todayTimestamp)"
+	$MailMessage.Body = "HANA VM Performance stats: $($todayTimestamp)"
     $MailMessage.Attachments.Add($attachment)
 	$SmtpClient.Send($MailMessage)
 
 echo "Done with Email"
-Disconnect-VIServer	PROD-vcenter -confirm:$false
+Disconnect-VIServer	vcenter -confirm:$false
 $SmtpClient.dispose()
 $MailMessage.Dispose()
 Start-Sleep -s 10

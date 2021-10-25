@@ -2,8 +2,8 @@
 Set-PowerCLIConfiguration -DefaultVIServerMode multiple -Confirm:$false
 
 #Connect to all Vmware Environments
-Connect-VIServer -Server ALNS0080 
-Connect-VIServer -Server pars0005
+Connect-VIServer -Server vcenter 
+Connect-VIServer -Server vcenter2
 
 #Set Date variable
 $a = date
